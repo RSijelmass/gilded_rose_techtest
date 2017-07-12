@@ -5,44 +5,66 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
+			# if item is others or Sulfuras
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
+      #checking quality boundaries
+				if item.quality > 0
+      # if item is others
+				 	if item.name != "Sulfuras, Hand of Ragnaros"
             item.quality = item.quality - 1
           end
         end
+			# if item is Aged Brie or Backstage
       else
+			#checking quality boundaries
         if item.quality < 50
+			# increasing quality + 1		
           item.quality = item.quality + 1
+			# if item is Backstage
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
+      # sell in ≤10
+						if item.sell_in < 11
               if item.quality < 50
-                item.quality = item.quality + 1
+      # increase quality + 1
+								item.quality = item.quality + 1
               end
             end
-            if item.sell_in < 6
+      # sell in ≤ 5
+			 			if item.sell_in < 6
+			#checking quality boundaries
               if item.quality < 50
+			#increase quality + 1
                 item.quality = item.quality + 1
               end
             end
           end
         end
       end
+			# if item is other, Brie, Backstage
       if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
+      # decrease sell_in  
+				item.sell_in = item.sell_in - 1
       end
+			# if sell in < 0
       if item.sell_in < 0
+			# if item is Sulfuras or other
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
+			# checking quality boundaries
             if item.quality > 0
+			# if item is other
               if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
+      # descreasing quality - 1
+								item.quality = item.quality - 1
               end
             end
+			# if item is Backstage
           else
             item.quality = item.quality - item.quality
           end
+			# if item is Aged Brie
         else
+			# checking quality boundaries
           if item.quality < 50
             item.quality = item.quality + 1
           end

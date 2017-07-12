@@ -26,8 +26,7 @@ describe GildedRose do
 				items = [Item.new("bar", 0, 0)]
 				expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 0
 		end
-
-end
+	end
 
 	describe "handles Sulfuras" do
 		it "doesn't change the quality of Sulfuras" do
