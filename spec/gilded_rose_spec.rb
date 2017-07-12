@@ -14,7 +14,15 @@ describe GildedRose do
 			items = create_and_update_item("foo", 0, 0)
       expect(items[0].name).to eq "foo"
     end
-	end
+		it "lets sell_in decrease by 1 above 0" do
+			items = create_and_update_item("foo", 1, 1)
+			expect(items[0].sell_in).to eq 0
+		end
+	it "lets sell_in decrease by 1 below 0" do
+			items = create_and_update_item("foo", -1, 1)
+			expect(items[0].sell_in).to eq -2
+		end
+end
 
 	describe "handles Sulfuras" do
 		it "doesn't change the quality of Sulfuras" do
