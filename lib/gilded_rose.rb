@@ -12,8 +12,7 @@ class GildedRose
 			
 			# if item is others
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-      # if item is others
-            item.quality = item.quality - 1
+        item.quality = item.quality - 1
 			# if item is Aged Brie or Backstage
       else
 			# increasing quality + 1		
@@ -32,15 +31,11 @@ class GildedRose
             end
           end
       end
-			# if item is other, Brie, Backstage
-      if item.name != "Sulfuras, Hand of Ragnaros"
-      end
 			# if sell in < 0
       if item.sell_in < 0
 			# if item is Sulfuras or other
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
-			# checking quality boundaries
 			# if item is other
               if item.name != "Sulfuras, Hand of Ragnaros"
       # descreasing quality - 1
