@@ -36,18 +36,28 @@ describe GildedRose do
 
 	describe "handles BackStage Passes" do
 		it "lets the quality rise 2x if sell_in ≤ 10" do
-			items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 8, 0)]
+			items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 8, 5)]
 			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by	2
 		end
 		it "lets the quality rise 3x if sell_in ≤ 5" do
-			items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 0)]
+			items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 5)]
 			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by	3
 		end
 		it "sets quality to 0 if sell_in < 0" do
-			items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 0)]
-			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by	3
+			items = [Item.new("Backstage passes to a TAFKAL80ETC concert", -1, 5)]
+			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.to 0
 		end
-end
-
+	end
+	
+	describe "handles other items" do
+		it "lets quality decrease by 1 if sell_in ≥ 0" do
+			items = [Item.new("foo", 1, 5)]
+			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by -1
+		end
+		it "lets quality decrease by 2 if sell_in < 0" do
+			items = [Item.new("foo", -1, 5)]
+			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by -2
+		end
+	end
 end
 
