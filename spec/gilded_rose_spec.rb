@@ -18,10 +18,15 @@ describe GildedRose do
 			items = create_and_update_item("foo", 1, 1)
 			expect(items[0].sell_in).to eq 0
 		end
-	it "lets sell_in decrease by 1 below 0" do
-			items = create_and_update_item("foo", -1, 1)
-			expect(items[0].sell_in).to eq -2
+		it "lets sell_in decrease by 1 below 0" do
+				items = create_and_update_item("foo", -1, 1)
+				expect(items[0].sell_in).to eq -2
+			end	
+		it "doesn't change quality to a lower value than 0" do
+				items = [Item.new("bar", 0, 0)]
+				expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 0
 		end
+
 end
 
 	describe "handles Sulfuras" do
@@ -37,9 +42,9 @@ end
 			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 2
 		end
 		it "doesn't change quality to a higher value than 50" do
-			items = [Item.new("Aged Brie", 0, 50)]
-			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 0
-		end
+				items = [Item.new("Aged Brie", 0, 50)]
+				expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 0
+		end	
 	end
 
 	describe "handles BackStage Passes" do
