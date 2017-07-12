@@ -33,7 +33,11 @@ describe GildedRose do
 			items = create_and_update_item("Sulfuras, Hand of Ragnaros", 5, 5)
 			expect(items[0].quality).to eq 5
 		end
-  end
+  it "doesn't change the sell_in of Sulfuras" do
+			items = create_and_update_item("Sulfuras, Hand of Ragnaros", 5, 5)
+			expect(items[0].sell_in).to eq 5
+		end
+end
 
 	describe "handles Aged Brie" do
 		it "lets the quality go up by 2" do

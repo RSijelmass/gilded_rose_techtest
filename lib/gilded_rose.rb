@@ -5,6 +5,7 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
+			item.sell_in -= 1 unless item.name == "Sulfuras, Hand of Ragnaros"
 			# if item is others or Sulfuras
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
       #checking quality boundaries
@@ -42,8 +43,6 @@ class GildedRose
       end
 			# if item is other, Brie, Backstage
       if item.name != "Sulfuras, Hand of Ragnaros"
-      # decrease sell_in  
-				item.sell_in = item.sell_in - 1
       end
 			# if sell in < 0
       if item.sell_in < 0
