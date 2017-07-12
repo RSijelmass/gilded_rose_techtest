@@ -12,13 +12,24 @@ describe GildedRose do
     end
 	end
 
-	describe "Handles Sulfuras" do
+	describe "handles Sulfuras" do
 		it "doesn't change the quality of Sulfuras" do
 			items = [Item.new("Sulfuras, Hand of Ragnaros", 5, 5)]		
 			GildedRose.new(items).update_quality
 			expect(items[0].quality).to eq 5
 		end
   end
+
+	describe "handles Aged Brie" do
+		it "lets the quality go up by 2" do
+			items = [Item.new("Aged Brie", 0, 0)]
+			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 2
+		end
+		it "doesn't change quality to a higher value than 50" do
+			items = [Item.new("Aged Brie", 0, 50)]
+			expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 0
+		end
+	end
 
 end
 
