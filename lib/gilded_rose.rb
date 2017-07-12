@@ -12,32 +12,25 @@ class GildedRose
 			end
 			# if item is others or Sulfuras
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-      #checking quality boundaries
       # if item is others
 				 	if item.name != "Sulfuras, Hand of Ragnaros"
             item.quality = item.quality - 1
           end
 			# if item is Aged Brie or Backstage
       else
-			#checking quality boundaries
 			# increasing quality + 1		
           item.quality = item.quality + 1
 			# if item is Backstage
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
       # sell in ≤10
 						if item.sell_in < 11
-              if item.quality < 50
       # increase quality + 1
 								item.quality = item.quality + 1
-              end
             end
       # sell in ≤ 5
 			 			if item.sell_in < 6
-			#checking quality boundaries
-              if item.quality < 50
 			#increase quality + 1
                 item.quality = item.quality + 1
-              end
             end
           end
       end
@@ -50,13 +43,11 @@ class GildedRose
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
 			# checking quality boundaries
-            if item.quality > 0
 			# if item is other
               if item.name != "Sulfuras, Hand of Ragnaros"
       # descreasing quality - 1
 								item.quality = item.quality - 1
               end
-            end
 			# if item is Backstage
           else
             item.quality = item.quality - item.quality
@@ -64,9 +55,7 @@ class GildedRose
 			# if item is Aged Brie
         else
 			# checking quality boundaries
-          if item.quality < 50
             item.quality = item.quality + 1
-          end
         end
       end
     end
