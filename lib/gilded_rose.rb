@@ -10,37 +10,21 @@ class GildedRose
 
 			next if item_quality_at_boundaries?(item)	
 			
-			# if item is others
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        item.quality -= 1
-			# if item is Aged Brie or Backstage
-      else
-			# increasing quality + 1		
-          item.quality += 1
-			# if item is Backstage
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-						handle_quality_backstage(item)
-          end
+			if item.name == "Backstage passes to a TAFKAL80ETC concert"
+				handle_quality_backstage(item)
+				return
       end
+
+			if item.name == "Aged Brie"
+				handle_quality_brie(item)
+				return
+			end
+
+      item.quality -= 1
 			# if sell in < 0
       if item.sell_in < 0
-			# if item is Sulfuras or other
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-			# if item is other
-              if item.name != "Sulfuras, Hand of Ragnaros"
       # descreasing quality - 1
-								item.quality = item.quality - 1
-              end
-			# if item is Backstage
-          else
-            item.quality = item.quality - item.quality
-          end
-			# if item is Aged Brie
-        else
-			# checking quality boundaries
-            item.quality = item.quality + 1
-        end
+				item.quality -= 1
       end
     end
   end
@@ -50,8 +34,14 @@ class GildedRose
 	end
 
 	def handle_quality_backstage(item)
-		item.quality += 1 if item.sell_in < 11
+		item.quality += 2 if item.sell_in < 11
 		item.quality += 1 if item.sell_in < 6
+		item.quality = 0 if item.sell_in < 0
+	end
+
+	def handle_quality_brie(item)
+		item.quality += 1
+		item.quality += 1 if item.sell_in < 0
 	end
 end
 
