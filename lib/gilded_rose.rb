@@ -13,21 +13,15 @@ class GildedRose
 			if item.name == "Backstage passes to a TAFKAL80ETC concert"
 				handle_quality_backstage(item)
 				return
-      end
-
-			if item.name == "Aged Brie"
+      elsif item.name == "Aged Brie"
 				handle_quality_brie(item)
 				return
 			end
 
       item.quality -= 1
-			# if sell in < 0
-      if item.sell_in < 0
-      # descreasing quality - 1
-				item.quality -= 1
-      end
-    end
-  end
+			item.quality -= 1 if item.sell_in < 0
+  	end
+	end
 
 	private
 
