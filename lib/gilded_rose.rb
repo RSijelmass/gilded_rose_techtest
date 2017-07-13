@@ -29,6 +29,8 @@ class GildedRose
     end
   end
 
+	private
+
 	def item_quality_at_boundaries?(item)
 		item.quality >= 50 or (item.quality <= 0 and item.name != "Aged Brie")
 	end
